@@ -1,0 +1,25 @@
+trigger:
+  branches:
+    include:
+    - 'main'
+    - 'test'
+
+  paths:
+    include:
+      - Posh-ACME.Deploy/*
+      - azure-pipelines.yml
+      - Install-ModulePackage.ps1
+      - metadata.json
+
+pr: 
+  - 'main'
+
+resources:
+  repositories:
+    - repository: mecm-deployment
+      endpoint: 'GHE-UMN'
+      type: githubenterprise
+      name: 'oit-hosting/mecm-deployment'
+
+stages:
+- template: azure-pipelines.yml@mecm-deployment
